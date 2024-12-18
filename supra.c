@@ -3,6 +3,11 @@
 SupraContext* supra_gsc;
 
 int InitSupra(char* windowName, int w, int h) {
+	if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD))
+	{
+		SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
+		return -1;
+	}
   supra_gsc = malloc(sizeof(SupraContext));
   supra_gsc->BasePath = SDL_GetBasePath();
 	supra_gsc->Device = SDL_CreateGPUDevice(

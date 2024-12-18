@@ -4,13 +4,9 @@
 int main() {
   int quit = 0;
 
-	if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD))
-	{
-		SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
-		return 1;
-	}
-
-	InitSupra("Hello!", 1000, 1000);
+	if(InitSupra("Hello!", 1000, 1000) != 0) {
+	  return 1;
+	};
   
   while(!quit) {
     SDL_Event evt;
