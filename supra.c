@@ -11,7 +11,7 @@ int InitSupra(char* windowName, int w, int h) {
   supra_gsc = malloc(sizeof(SupraContext));
   supra_gsc->BasePath = SDL_GetBasePath();
 	supra_gsc->Device = SDL_CreateGPUDevice(
-		SDL_GPU_SHADERFORMAT_SPIRV | SDL_GPU_SHADERFORMAT_DXIL | SDL_GPU_SHADERFORMAT_MSL,
+		SDL_GPU_SHADERFORMAT_SPIRV | SDL_GPU_SHADERFORMAT_MSL,
 		false,
 		NULL);
 
@@ -125,10 +125,10 @@ SDL_GPUShader* LoadShader(
 	SDL_GPUShaderFormat format = SDL_GPU_SHADERFORMAT_INVALID;
 	const char *entrypoint;
 
-	if (backendFormats & SDL_GPU_SHADERFORMAT_SPIRV) {
-		SDL_snprintf(fullPath, sizeof(fullPath), "%sshaders/SPIRV/%s.spv", supra_gsc->BasePath, shaderFilename);
-		format = SDL_GPU_SHADERFORMAT_SPIRV;
-		entrypoint = "main";
+	if (backendFormats & SDL_GPU_SHADERFORMAT_MSL) {
+		SDL_snprintf(fullPath, sizeof(fullPath), "%sshaders/MSL/%s.metal", supra_gsc->BasePath, shaderFilename);
+		format = SDL_GPU_SHADERFORMAT_MSL;
+		entrypoint = "start";
 	}
 
 	size_t codeSize;

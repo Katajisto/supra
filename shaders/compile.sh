@@ -1,11 +1,13 @@
-for filename in *.vert.hlsl; do
+for filename in *.vert.slang; do
     if [ -f "$filename" ]; then
-        glslc -fshader-stage=vertex "$filename" -o "./SPIRV/${filename/.hlsl/.spv}"
+        slangc -stage vertex -entry start -o "./SPIRV/${filename/.slang/.spv}"  "$filename"
+        slangc -stage vertex -entry start -o "./MSL/${filename/.slang/.metal}"    "$filename" 
     fi
 done
 
-for filename in *.frag.hlsl; do
+for filename in *.frag.slang; do
     if [ -f "$filename" ]; then
-        glslc -fshader-stage=fragment "$filename" -o "./SPIRV/${filename/.hlsl/.spv}"
+        slangc -stage fragment -entry start  -o "./SPIRV/${filename/.slang/.spv}" "$filename"
+        slangc -stage fragment -entry start  -o "./MSL/${filename/.slang/.metal}" "$filename"
     fi
 done

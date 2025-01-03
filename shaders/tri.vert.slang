@@ -9,7 +9,7 @@ struct Output
     float4 Position : SV_Position;
 };
 
-Output main(Input input)
+Output start(Input input)
 {
     Output output;
     float2 pos;
